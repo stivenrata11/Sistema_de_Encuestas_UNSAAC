@@ -11,7 +11,7 @@ if(isset($_SESSION['sesion_email'])){
   $datos_sesion_usuarios = $query_sesion->fetchAll(PDO::FETCH_ASSOC);
 
   foreach($datos_sesion_usuarios as $datos_sesion_usuario){
-    $datos_sesion_usuario['nombre'];
+    $datos_sesion_usuario['nombres'];
   }
 }else{
   echo "el usuario no paso por el login";
@@ -42,6 +42,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- iconos -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?=APP_URL;?>/public/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?=APP_URL;?>/public/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?=APP_URL;?>/public/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -180,23 +184,52 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-          <a href="#" class="nav-link active d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center">
-              <i class="nav-icon bi bi-bookmarks-fill me-3" style="font-size: 1.1rem;"></i>
-              <span class="menu-title">Roles</span>
-            </div>
-            <i class="bi bi-chevron-down toggle-icon"></i>
-          </a>
-            <ul class="nav nav-treeview menu-items">
-              <li class="nav-item menu-item">
-                <a href="<?=APP_URL;?>/admin/roles" class="nav-link active d-flex align-items-center">
-                  <i class="nav-icon bi bi-person-badge me-2"></i>
-                  <span class="menu-text">Administrar roles</span>
-                </a>
-              </li>
-            </ul>
-          </li>
+
+
+
+               <li class="nav-item menu-item">
+                  <a href="#" class="nav-link menu-link d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                      <i class="nav-icon bi bi-shield-lock me-3 text-primary" style="font-size: 1.1rem;"></i>
+                      <span class="menu-title fw-medium">Roles</span>
+                    </div>
+                    <i class="bi bi-chevron-down toggle-icon transition-all"></i>
+                  </a>
+                  <ul class="nav nav-treeview menu-items">
+                    <li class="nav-item">
+                      <a href="<?=APP_URL;?>/admin/roles" class="nav-link d-flex align-items-center py-2 ps-4">
+                        <i class="nav-icon bi bi-person-gear me-2 text-muted"></i>
+                        <span class="menu-text">Administrar roles</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+
+
+
+                <li class="nav-item menu-item">
+                  <a href="#" class="nav-link menu-link d-flex align-items-center justify-content-between bg-hover-light">
+                    <div class="d-flex align-items-center">
+                      <i class="nav-icon bi bi-people-fill me-3 text-primary" style="font-size: 1.1rem;"></i>
+                      <span class="menu-title fw-medium">Usuarios</span>
+                    </div>
+                    <i class="bi bi-chevron-down toggle-icon transition-all"></i>
+                  </a>
+                  <ul class="nav nav-treeview menu-items">
+                    <li class="nav-item">
+                      <a href="<?=APP_URL;?>/admin/usuarios" class="nav-link d-flex align-items-center py-2 ps-4 bg-hover-light">
+                        <i class="nav-icon bi bi-person-gear me-2 text-primary"></i>
+                        <span class="menu-text">Administrar Usuarios</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+
+
+
+
           <li class="nav-item logout-item">
             <a href="<?=APP_URL;?>/login" class="nav-link d-flex align-items-center">
               <i class="nav-icon bi bi-box-arrow-right me-2"></i>
