@@ -1,9 +1,9 @@
 <?php
-$id_usuario = $_GET['id'];
+$id_escuela = $_GET['id'];
 
 include('../../app/config.php');
 include('../../admin/layout/parte1.php');
-include('../../app/controllers/usuarios/datos_del_usuario.php');
+include('../../app/controllers/escuelas/datos_de_las_escuelas.php');
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -13,13 +13,13 @@ include('../../app/controllers/usuarios/datos_del_usuario.php');
     <div class="content">
         <div class="container">
             <div class="row">
-                <h1>Usuario: <?=$nombres?></h1>
+                <h1>Escuela Profesional: <?=$nombre_escuela?></h1>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-outline card-info">
                         <div class="card-header">
-                            <h3 class="card-title">Información del usuario</h3>
+                            <h3 class="card-title">Información de la escuela profesional</h3>
                             <div class="card-tools">
                             </div>
                         </div>
@@ -27,24 +27,24 @@ include('../../app/controllers/usuarios/datos_del_usuario.php');
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="">Nombre del rol</label>
+                                            <label for="">Nombre de la facultad</label>
                                             <div class="form-inline">
-                                                <p><?=$nombre_rol;?></p>
+                                                <p><?=$nombre_facultad;?></p>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="">Nombre del usuario</label>
-                                            <p><?=$nombres;?></p>
+                                            <label for="">Nombre de la escuela profesional</label>
+                                            <p><?=$nombre_escuela;?></p>
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="">Email</label>
-                                            <p><?=$email;?></p>
+                                            <label for="">Código de la escuela profesional</label>
+                                            <p><?=$codigo_escuela;?></p>
                                         </div>
                                     </div>
 
@@ -73,7 +73,7 @@ include('../../app/controllers/usuarios/datos_del_usuario.php');
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <a href="<?= APP_URL; ?>/admin/usuarios" class="btn btn-secondary">Volver</a>
+                                            <a href="<?= APP_URL; ?>/admin/escuelas" class="btn btn-secondary">Volver</a>
                                         </div>
                                     </div>
                                 </div>

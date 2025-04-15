@@ -1,7 +1,7 @@
 <?php
 include ('../../app/config.php');
 include ('../../admin/layout/parte1.php');
-include ('../../app/controllers/roles/listado_de_roles.php');
+include ('../../app/controllers/escuelas/listado_de_escuelas.php');
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -15,42 +15,68 @@ include ('../../app/controllers/roles/listado_de_roles.php');
             <div class="card-header bg-white border-bottom-0">
               <div class="d-flex justify-content-between align-items-center">
                 <h1 class="card-title mb-0 text-primary">
-                  <i class="bi bi-people-fill mr-2"></i>Listado de Roles
+                  <i class="bi bi-book mr-2"></i>Listado de Escuelas Profesionales
                 </h1>
                 <a href="create.php" class="btn btn-primary btn-sm rounded-pill shadow-sm">
-                  <i class="bi bi-plus-circle mr-1"></i> Nuevo Rol
+                  <i class="bi bi-plus-circle mr-1"></i> Nueva Escuela
                 </a>
               </div>
             </div>
             
             <div class="card-body px-4">
               <div class="table-responsive">
-                <table id="roles-table" class="table table-hover table-striped">
+                <table id="escuelas-table" class="table table-hover table-striped">
                   <thead class="bg-light">
                     <tr>
-                      <th class="text-center" style="width: 10%">#</th>
-                      <th class="text-left">Nombre del Rol</th>
-                      <th class="text-center" style="width: 20%">Acciones</th>
+                      <th class="text-center" style="width: 5%">#</th>
+                      <th class="text-left">Escuela Profesional</th>
+                      <th class="text-center">Código</th>
+                      <th class="text-left">Facultad</th>
+                      <th class="text-center">Creación</th>
+                      <th class="text-center">Estado</th>
+                      <th class="text-center" style="width: 12%">Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
-                    $contador_rol = 0;
-                    foreach ($roles as $role) {
-                      $id_rol = $role['id_rol'];
-                      $contador_rol++;
+                    $contador_escuelas = 0;
+                    foreach ($escuelas as $escuela) {
+                      $id_escuela = $escuela['id_escuela'];
+                      $contador_escuelas++;
+                      $estado = $escuela['estado'];
+                      $badge_class = ($estado == 'ACTIVO') ? 'bg-success-light text-success' : 'bg-danger-light text-danger';
                     ?>
                     <tr>
-                      <td class="text-center align-middle"><?= $contador_rol; ?></td>
+                      <td class="text-center align-middle"><?= $contador_escuelas; ?></td>
                       <td class="align-middle">
-                        <span class="badge bg-primary-light text-primary rounded-pill px-3 py-1">
-                          <?= $role['nombre_rol']; ?>
+                        <div class="fw-medium">
+                          <i class="bi bi-mortarboard text-primary me-2"></i>
+                          <?= $escuela['nombre_escuela']; ?>
+                        </div>
+                      </td>
+                      <td class="text-center align-middle">
+                        <span class="badge bg-secondary-light text-secondary rounded-pill px-3 py-1">
+                          <?= $escuela['codigo_escuela']; ?>
+                        </span>
+                      </td>
+                      <td class="align-middle">
+                        <span class="badge bg-info-light text-info rounded-pill px-3 py-1">
+                          <i class="bi bi-building me-1"></i>
+                          <?= $escuela['nombre_facultad']; ?>
+                        </span>
+                      </td>
+                      <td class="text-center align-middle">
+                        <small><?= $escuela['fyh_creacion']; ?></small>
+                      </td>
+                      <td class="text-center align-middle">
+                        <span class="badge <?= $badge_class; ?> rounded-pill px-3 py-1">
+                          <?= $estado; ?>
                         </span>
                       </td>
                       <td class="text-center align-middle">
                         <div class="d-flex justify-content-center gap-2">
                           <!-- Ver Detalles -->
-                          <a href="show.php?id=<?= $id_rol; ?>" 
+                          <a href="show.php?id=<?= $id_escuela; ?>" 
                              class="btn btn-sm btn-outline-info rounded-circle action-btn"
                              data-bs-toggle="tooltip"
                              data-bs-placement="top"
@@ -59,7 +85,7 @@ include ('../../app/controllers/roles/listado_de_roles.php');
                           </a>
                           
                           <!-- Editar -->
-                          <a href="edit.php?id=<?= $id_rol; ?>" 
+                          <a href="edit.php?id=<?= $id_escuela; ?>" 
                              class="btn btn-sm btn-outline-warning rounded-circle action-btn"
                              data-bs-toggle="tooltip"
                              data-bs-placement="top"
@@ -68,11 +94,11 @@ include ('../../app/controllers/roles/listado_de_roles.php');
                           </a>
                           
                           <!-- Eliminar -->
-                          <form action="<?= APP_URL; ?>/app/controllers/roles/delete.php" 
+                          <form action="<?= APP_URL; ?>/app/controllers/escuelas/delete.php" 
                                 method="post" 
                                 class="delete-form"
-                                onsubmit="return confirmDelete(event, <?= $id_rol; ?>)">
-                            <input type="hidden" name="id_rol" value="<?= $id_rol; ?>">
+                                onsubmit="return confirmDelete(event, <?= $id_escuela; ?>)">
+                            <input type="hidden" name="id_escuela" value="<?= $id_escuela; ?>">
                             <button type="submit" 
                                     class="btn btn-sm btn-outline-danger rounded-circle action-btn"
                                     data-bs-toggle="tooltip"
@@ -91,7 +117,7 @@ include ('../../app/controllers/roles/listado_de_roles.php');
             </div>
             
             <div class="card-footer bg-white text-muted small">
-              Mostrando <?= count($roles); ?> registros
+              Mostrando <?= count($escuelas); ?> registros
             </div>
           </div>
         </div>
@@ -108,14 +134,14 @@ include ('../../layout/mensajes.php');
 <!-- DataTables Configuration -->
 <script>
 $(document).ready(function() {
-  $('#roles-table').DataTable({
+  $('#escuelas-table').DataTable({
     "dom": '<"row"<"col-md-6"l><"col-md-6"f>>rt<"row"<"col-md-6"i><"col-md-6"p>>',
     "language": {
-      "emptyTable": "No hay roles registrados",
-      "info": "Mostrando _START_ a _END_ de _TOTAL_ roles",
+      "emptyTable": "No hay escuelas profesionales registradas",
+      "info": "Mostrando _START_ a _END_ de _TOTAL_ escuelas",
       "infoEmpty": "Mostrando 0 registros",
-      "infoFiltered": "(filtrado de _MAX_ roles totales)",
-      "lengthMenu": "Mostrar _MENU_ roles",
+      "infoFiltered": "(filtrado de _MAX_ escuelas totales)",
+      "lengthMenu": "Mostrar _MENU_ escuelas",
       "search": "Buscar:",
       "zeroRecords": "No se encontraron coincidencias",
       "paginate": {
@@ -128,7 +154,7 @@ $(document).ready(function() {
     "responsive": true,
     "autoWidth": false,
     "columnDefs": [
-      { "orderable": false, "targets": [2] }
+      { "orderable": false, "targets": [6] }
     ],
     "pageLength": 10,
     "drawCallback": function(settings) {
@@ -142,7 +168,7 @@ $(document).ready(function() {
     var form = e.target;
     
     Swal.fire({
-      title: '¿Eliminar rol?',
+      title: '¿Eliminar escuela?',
       text: "Esta acción no se puede deshacer",
       icon: 'warning',
       showCancelButton: true,
@@ -184,8 +210,28 @@ $(document).ready(function() {
     transform: translateY(-2px);
   }
   
-  .badge.bg-primary-light {
+  .badge {
+    font-weight: 500;
+  }
+  
+  .bg-primary-light {
     background-color: #e3f2fd;
+  }
+  
+  .bg-secondary-light {
+    background-color: #f3f5f7;
+  }
+  
+  .bg-info-light {
+    background-color: #e1f5fe;
+  }
+  
+  .bg-success-light {
+    background-color: #e8f5e9;
+  }
+  
+  .bg-danger-light {
+    background-color: #ffebee;
   }
   
   .table th {

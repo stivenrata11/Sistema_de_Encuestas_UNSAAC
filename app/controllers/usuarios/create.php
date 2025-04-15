@@ -29,7 +29,7 @@ if($password == $password_repet){
             session_start();
             $_SESSION['mensaje'] = "Se registro el usuario";
             $_SESSION['icono'] = "success";
-            header('Location'.APP_URL."/admin/usuarios");
+            header('Location: ' . APP_URL . "/admin/usuarios");
         }else{
             session_start();
             $_SESSION['mensaje'] = "No se pudo registar al usuario";

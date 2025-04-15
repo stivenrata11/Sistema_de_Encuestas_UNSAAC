@@ -4,28 +4,22 @@ include ('../app/config.php');
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-$sql = 'SELECT * FROM usuarios WHERE email = :email';
+$sql = 'SELECT * FROM usuarios WHERE email = :email AND estado = "1" LIMIT 1';
 $query = $pdo->prepare($sql);
 $query->execute([':email' => $email]);
 
-$usuarios = $query->fetchAll(PDO::FETCH_ASSOC);
+$usuario = $query->fetch(PDO::FETCH_ASSOC);
 
-$contador = 0;
-$password_tabla = null;
-
-foreach ($usuarios as $usuario) {
-    $password_tabla = $usuario['password'];
-    $contador++;
-}
-
-// Verificar si el email existe y si la contraseña es correcta
-if ($contador > 0) {
-    if ($password === $password_tabla) {
-        echo "Los datos son correctos";
+if ($usuario) {
+    // Verificar la contraseña con hash (recomendado)
+    if (password_verify($password, $usuario['password'])) {
+        // Autenticación exitosa
         session_start();
         $_SESSION['mensaje'] = "Bienvenido al Sistema";
         $_SESSION['icono'] = "success";
         $_SESSION['sesion_email'] = $email;
+        $_SESSION['sesion_nombres'] = $usuario['nombres'];
+        $_SESSION['sesion_rol'] = $usuario['rol_id'];
         header('Location: ' . APP_URL . "/admin");
         exit();
     } else {
@@ -34,7 +28,7 @@ if ($contador > 0) {
         exit();
     }
 } else {
-    // Email incorrecto
+    // Email incorrecto o usuario inactivo
     header('Location: ' . APP_URL . "/login?error=email");
     exit();
 }

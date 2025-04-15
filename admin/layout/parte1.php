@@ -47,7 +47,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?=APP_URL;?>/public/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="<?=APP_URL;?>/public/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
   <!-- Navbar -->
@@ -175,7 +175,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="https://img.favpng.com/14/16/25/web-development-php-software-developer-programmer-web-design-png-favpng-kPtxyC1d3pBDUYj6BthX4AFpp_t.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-        <a href="#" class="d-block"><?= isset($datos_sesion_usuarios[0]['nombre']) ? $datos_sesion_usuarios[0]['nombre'] : 'Usuario'; ?></a>
+        <a href="#" class="d-block"><?= isset($datos_sesion_usuarios[0]['nombres']) ? $datos_sesion_usuarios[0]['nombres'] : 'Usuario'; ?></a>
         </div>
       </div>
 
@@ -198,12 +198,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <ul class="nav nav-treeview menu-items">
                     <li class="nav-item">
                       <a href="<?=APP_URL;?>/admin/roles" class="nav-link d-flex align-items-center py-2 ps-4">
-                        <i class="nav-icon bi bi-person-gear me-2 text-muted"></i>
+                        <i class="nav-icon bi bi-person-lock me-2 text-primary"></i>
                         <span class="menu-text">Administrar roles</span>
                       </a>
                     </li>
                   </ul>
                 </li>
+
 
 
 
@@ -225,6 +226,70 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
                   </ul>
                 </li>
+
+                <li class="nav-item menu-item">
+                  <a href="#" class="nav-link menu-link d-flex align-items-center justify-content-between bg-hover-light">
+                    <div class="d-flex align-items-center">
+                      <i class="nav-icon bi bi-building me-3 text-primary" style="font-size: 1.1rem;"></i>
+                      <span class="menu-title fw-medium">Facultades</span>
+                    </div>
+                    <i class="bi bi-chevron-down toggle-icon transition-all"></i>
+                  </a>
+                  <ul class="nav nav-treeview menu-items">
+                    <li class="nav-item">
+                      <a href="<?=APP_URL;?>/admin/facultades" class="nav-link d-flex align-items-center py-2 ps-4 bg-hover-light">
+                        <i class="nav-icon bi bi-list-columns-reverse me-2 text-primary"></i>
+                        <span class="menu-text">Listado de Facultades</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <li class="nav-item menu-item">
+                  <a href="#" class="nav-link menu-link d-flex align-items-center justify-content-between bg-hover-light">
+                    <div class="d-flex align-items-center">
+                      <i class="nav-icon bi bi-mortarboard-fill me-3 text-primary" style="font-size: 1.1rem;"></i>
+                      <span class="menu-title fw-medium">Escuelas Profesionales</span>
+                    </div>
+                    <i class="bi bi-chevron-down toggle-icon transition-all"></i>
+                  </a>
+                  <ul class="nav nav-treeview menu-items">
+                    <li class="nav-item">
+                      <a href="<?=APP_URL;?>/admin/escuelas" class="nav-link d-flex align-items-center py-2 ps-4 bg-hover-light">
+                        <i class="nav-icon bi bi-list-check me-2 text-primary"></i>
+                        <span class="menu-text">Listado de Escuelas</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+
+                <!-- ENCUESTAS -->
+                <li class="nav-item menu-item">
+                  <a href="#" class="nav-link menu-link d-flex align-items-center justify-content-between bg-hover-light">
+                    <div class="d-flex align-items-center">
+                      <i class="nav-icon bi bi-clipboard-data me-3 text-primary" style="font-size: 1.1rem;"></i>
+                      <span class="menu-title fw-medium">Encuestas</span>
+                    </div>
+                    <i class="bi bi-chevron-down toggle-icon transition-all"></i>
+                  </a>
+                  <ul class="nav nav-treeview menu-items">
+                    <li class="nav-item">
+                      <a href="<?=APP_URL;?>/admin/encuestas" class="nav-link d-flex align-items-center py-2 ps-4 bg-hover-light">
+                        <i class="nav-icon bi bi-card-checklist me-2 text-primary"></i>
+                        <span class="menu-text">Listado de Encuestas</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+
+
+
+
+
+
+
 
 
 

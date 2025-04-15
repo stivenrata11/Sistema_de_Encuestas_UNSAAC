@@ -1,7 +1,7 @@
 <?php
 include ('../../app/config.php');
 include ('../../admin/layout/parte1.php');
-include ('../../app/controllers/roles/listado_de_roles.php');
+include ('../../app/controllers/facultades/listado_de_facultades.php');
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -15,42 +15,61 @@ include ('../../app/controllers/roles/listado_de_roles.php');
             <div class="card-header bg-white border-bottom-0">
               <div class="d-flex justify-content-between align-items-center">
                 <h1 class="card-title mb-0 text-primary">
-                  <i class="bi bi-people-fill mr-2"></i>Listado de Roles
+                  <i class="bi bi-building mr-2"></i>Listado de Facultades
                 </h1>
                 <a href="create.php" class="btn btn-primary btn-sm rounded-pill shadow-sm">
-                  <i class="bi bi-plus-circle mr-1"></i> Nuevo Rol
+                  <i class="bi bi-plus-circle mr-1"></i> Agregar Facultad
                 </a>
               </div>
             </div>
             
             <div class="card-body px-4">
               <div class="table-responsive">
-                <table id="roles-table" class="table table-hover table-striped">
+                <table id="facultades-table" class="table table-hover table-striped">
                   <thead class="bg-light">
                     <tr>
-                      <th class="text-center" style="width: 10%">#</th>
-                      <th class="text-left">Nombre del Rol</th>
-                      <th class="text-center" style="width: 20%">Acciones</th>
+                      <th class="text-center" style="width: 5%">#</th>
+                      <th class="text-left">Nombre</th>
+                      <th class="text-center">Código</th>
+                      <th class="text-center">Creación</th>
+                      <th class="text-center">Estado</th>
+                      <th class="text-center" style="width: 15%">Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
-                    $contador_rol = 0;
-                    foreach ($roles as $role) {
-                      $id_rol = $role['id_rol'];
-                      $contador_rol++;
+                    $contador_facultades = 0;
+                    foreach ($facultades as $facultad) {
+                      $id_facultad = $facultad['id_facultad'];
+                      $contador_facultades++;
+                      $estado = $facultad['estado'];
+                      $badge_class = ($estado == 'ACTIVO') ? 'bg-success-light text-success' : 'bg-danger-light text-danger';
                     ?>
                     <tr>
-                      <td class="text-center align-middle"><?= $contador_rol; ?></td>
+                      <td class="text-center align-middle"><?= $contador_facultades; ?></td>
                       <td class="align-middle">
-                        <span class="badge bg-primary-light text-primary rounded-pill px-3 py-1">
-                          <?= $role['nombre_rol']; ?>
+                        <div class="fw-medium">
+                          <i class="bi bi-building text-primary me-2"></i>
+                          <?= $facultad['nombre_facultad']; ?>
+                        </div>
+                      </td>
+                      <td class="text-center align-middle">
+                        <span class="badge bg-secondary-light text-secondary rounded-pill px-3 py-1">
+                          <?= $facultad['codigo_facultad']; ?>
+                        </span>
+                      </td>
+                      <td class="text-center align-middle">
+                        <small><?= $facultad['fyh_creacion']; ?></small>
+                      </td>
+                      <td class="text-center align-middle">
+                        <span class="badge <?= $badge_class; ?> rounded-pill px-3 py-1">
+                          <?= $estado; ?>
                         </span>
                       </td>
                       <td class="text-center align-middle">
                         <div class="d-flex justify-content-center gap-2">
                           <!-- Ver Detalles -->
-                          <a href="show.php?id=<?= $id_rol; ?>" 
+                          <a href="show.php?id=<?= $id_facultad; ?>" 
                              class="btn btn-sm btn-outline-info rounded-circle action-btn"
                              data-bs-toggle="tooltip"
                              data-bs-placement="top"
@@ -59,7 +78,7 @@ include ('../../app/controllers/roles/listado_de_roles.php');
                           </a>
                           
                           <!-- Editar -->
-                          <a href="edit.php?id=<?= $id_rol; ?>" 
+                          <a href="edit.php?id=<?= $id_facultad; ?>" 
                              class="btn btn-sm btn-outline-warning rounded-circle action-btn"
                              data-bs-toggle="tooltip"
                              data-bs-placement="top"
@@ -68,11 +87,11 @@ include ('../../app/controllers/roles/listado_de_roles.php');
                           </a>
                           
                           <!-- Eliminar -->
-                          <form action="<?= APP_URL; ?>/app/controllers/roles/delete.php" 
+                          <form action="<?= APP_URL; ?>/app/controllers/facultades/delete.php" 
                                 method="post" 
                                 class="delete-form"
-                                onsubmit="return confirmDelete(event, <?= $id_rol; ?>)">
-                            <input type="hidden" name="id_rol" value="<?= $id_rol; ?>">
+                                onsubmit="return confirmDelete(event, <?= $id_facultad; ?>)">
+                            <input type="hidden" name="id_facultad" value="<?= $id_facultad; ?>">
                             <button type="submit" 
                                     class="btn btn-sm btn-outline-danger rounded-circle action-btn"
                                     data-bs-toggle="tooltip"
@@ -91,7 +110,7 @@ include ('../../app/controllers/roles/listado_de_roles.php');
             </div>
             
             <div class="card-footer bg-white text-muted small">
-              Mostrando <?= count($roles); ?> registros
+              Mostrando <?= count($facultades); ?> registros
             </div>
           </div>
         </div>
@@ -108,14 +127,14 @@ include ('../../layout/mensajes.php');
 <!-- DataTables Configuration -->
 <script>
 $(document).ready(function() {
-  $('#roles-table').DataTable({
+  $('#facultades-table').DataTable({
     "dom": '<"row"<"col-md-6"l><"col-md-6"f>>rt<"row"<"col-md-6"i><"col-md-6"p>>',
     "language": {
-      "emptyTable": "No hay roles registrados",
-      "info": "Mostrando _START_ a _END_ de _TOTAL_ roles",
+      "emptyTable": "No hay facultades registradas",
+      "info": "Mostrando _START_ a _END_ de _TOTAL_ facultades",
       "infoEmpty": "Mostrando 0 registros",
-      "infoFiltered": "(filtrado de _MAX_ roles totales)",
-      "lengthMenu": "Mostrar _MENU_ roles",
+      "infoFiltered": "(filtrado de _MAX_ facultades totales)",
+      "lengthMenu": "Mostrar _MENU_ facultades",
       "search": "Buscar:",
       "zeroRecords": "No se encontraron coincidencias",
       "paginate": {
@@ -128,7 +147,7 @@ $(document).ready(function() {
     "responsive": true,
     "autoWidth": false,
     "columnDefs": [
-      { "orderable": false, "targets": [2] }
+      { "orderable": false, "targets": [5] }
     ],
     "pageLength": 10,
     "drawCallback": function(settings) {
@@ -142,7 +161,7 @@ $(document).ready(function() {
     var form = e.target;
     
     Swal.fire({
-      title: '¿Eliminar rol?',
+      title: '¿Eliminar facultad?',
       text: "Esta acción no se puede deshacer",
       icon: 'warning',
       showCancelButton: true,
@@ -184,8 +203,24 @@ $(document).ready(function() {
     transform: translateY(-2px);
   }
   
-  .badge.bg-primary-light {
+  .badge {
+    font-weight: 500;
+  }
+  
+  .bg-primary-light {
     background-color: #e3f2fd;
+  }
+  
+  .bg-secondary-light {
+    background-color: #f3f5f7;
+  }
+  
+  .bg-success-light {
+    background-color: #e8f5e9;
+  }
+  
+  .bg-danger-light {
+    background-color: #ffebee;
   }
   
   .table th {
