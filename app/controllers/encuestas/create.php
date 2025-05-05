@@ -3,6 +3,8 @@ include("../../../app/config.php");
 
 // Datos recibidos desde el formulario
 $escuela_id     = $_POST['escuela_id'];
+$anio_academico = $_POST['anio_academico'];
+$semestre_academico = $_POST['semestre_academico'];
 $nombre         = $_POST['nombre'];
 $tipo           = $_POST['tipo'];
 $observaciones  = $_POST['observaciones'];
@@ -57,6 +59,8 @@ try {
     $sentencia = $pdo->prepare("
         INSERT INTO encuestas (
             escuela_id, 
+            anio_academico,
+            semestre_academico,
             nombre, 
             tipo, 
             url, 
@@ -65,6 +69,8 @@ try {
             estado
         ) VALUES (
             :escuela_id, 
+            :anio_academico,
+            :semestre_academico,
             :nombre, 
             :tipo, 
             :url, 
@@ -75,6 +81,8 @@ try {
     ");
 
     $sentencia->bindParam(':escuela_id', $escuela_id);
+    $sentencia->bindParam(':anio_academico', $anio_academico);
+    $sentencia->bindParam(':semestre_academico', $semestre_academico);
     $sentencia->bindParam(':nombre', $nombre);
     $sentencia->bindParam(':tipo', $tipo);
     $sentencia->bindParam(':url', $url);

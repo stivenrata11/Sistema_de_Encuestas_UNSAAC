@@ -231,7 +231,7 @@ foreach ($escuelas as $escuela) {
                     ['label' => 'Usuarios Registrados', 'count' => count($usuarios), 'color' => 'success', 'icon' => 'bi-people-fill', 'url' => 'usuarios'],
                     ['label' => 'Facultades Registradas', 'count' => count($facultades), 'color' => 'info', 'icon' => 'bi-building', 'url' => 'facultades'],
                     ['label' => 'Escuelas Registradas', 'count' => count($escuelas), 'color' => 'warning', 'icon' => 'bi-mortarboard-fill', 'url' => 'escuelas'],
-                    ['label' => 'Encuestas Realizadas', 'count' => count($encuestas), 'color' => 'info', 'icon' => 'bi-clipboard-data', 'url' => 'encuestas']
+                    ['label' => 'Encuestas Realizadas', 'count' => count($encuestas), 'color' => 'info', 'icon' => 'bi-clipboard-data', 'url' => 'encuestas'],
                 ];
                 foreach ($boxes as $box):
             ?>

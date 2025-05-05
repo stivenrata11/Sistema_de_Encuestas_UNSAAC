@@ -87,6 +87,8 @@ VALUES
 CREATE TABLE encuestas (
     id_encuestas INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     escuela_id INT(11) NOT NULL, -- Relacionada con la escuela profesional
+    anio_academico INT(4) NOT NULL,
+    semestre_academico VARCHAR(20) NOT NULL,
     nombre VARCHAR(255) NOT NULL,
     tipo VARCHAR(50) NOT NULL, -- Ej: PDF, DOCX, XLSX, GOOGLE_FORM
     url TEXT NOT NULL, -- Ruta del archivo o link del formulario
@@ -103,16 +105,29 @@ CREATE TABLE encuestas (
 
 -- Formato en PDF para Ingeniería de Sistemas
 INSERT INTO encuestas (
-    escuela_id, nombre, tipo, url, observaciones, fyh_creacion, estado
+    escuela_id, anio_academico, semestre_academico, nombre, tipo, url, observaciones, fyh_creacion, estado
 ) VALUES (
-    1, 'Formato de Encuesta Académica', 'PDF', '/uploads/formatos/IS2025.pdf',
+    1, 2025, 'I', 'Formato de Encuesta Académica', 'PDF', '/uploads/formatos/IS2025.pdf',
     'Formato oficial aprobado por la facultad', '2025-04-14 12:00:00', '1'
 );
 
 -- Google Forms para Ingeniería Civil
 INSERT INTO encuestas (
-    escuela_id, nombre, tipo, url, observaciones, fyh_creacion, estado
+    escuela_id, anio_academico, semestre_academico, nombre, tipo, url, observaciones, fyh_creacion, estado
 ) VALUES (
-    2, 'Formulario Google Forms Infraestructura', 'GOOGLE_FORM', 'https://forms.gle/infraestructuraIC2025',
+    2, 2025, 'II', 'Formulario Google Forms Infraestructura', 'GOOGLE_FORM', 'https://forms.gle/infraestructuraIC2025',
     'Link creado por el área de infraestructura', '2025-04-14 12:10:00', '1'
 );
+
+
+CREATE TABLE registro_actividades (
+    id_actividad INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT(11) NOT NULL,
+    modulo VARCHAR(50) NOT NULL,
+    accion VARCHAR(50) NOT NULL,
+    detalles TEXT,
+    ip_address VARCHAR(45),
+    user_agent VARCHAR(255),
+    fyh_creacion DATETIME,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario)
+) ENGINE=InnoDB;

@@ -295,6 +295,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
+
+
           <li class="nav-item logout-item">
             <a href="<?=APP_URL;?>/login" class="nav-link d-flex align-items-center">
               <i class="nav-icon bi bi-box-arrow-right me-2"></i>

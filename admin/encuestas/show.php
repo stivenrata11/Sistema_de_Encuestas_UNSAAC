@@ -10,6 +10,8 @@ $sql_encuesta = "
     SELECT 
         e.id_encuestas,
         e.nombre AS nombre_encuesta,
+        e.anio_academico,
+        e.semestre_academico,
         e.tipo,
         e.url,
         e.observaciones,
@@ -73,6 +75,17 @@ if (!$isGoogleForm) {
                                 <div class="col-md-6">
                                     <strong>Tipo:</strong>
                                     <p class="text-muted"><?= $encuesta['tipo']; ?></p>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <strong>Año Académico:</strong>
+                                    <p class="text-muted"><?= $encuesta['anio_academico']; ?></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <strong>Semestre Académico:</strong>
+                                    <p class="text-muted"><?= $encuesta['semestre_academico']; ?></p>
                                 </div>
                             </div>
                             

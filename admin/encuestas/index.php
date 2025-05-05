@@ -26,6 +26,44 @@ include ('../../app/controllers/encuestas/listado_de_encuestas.php');
                   </a>
                 </div>
               </div>
+              
+              <!-- Formulario de filtros -->
+              <form method="get" action="" class="mt-3">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="anio">Año Académico</label>
+                      <select name="anio" id="anio" class="form-control">
+                        <option value="">Todos los años</option>
+                        <?php 
+                        $currentYear = date('Y');
+                        for ($i = $currentYear; $i >= $currentYear - 5; $i--) { 
+                          $selected = (isset($_GET['anio']) && $_GET['anio'] == $i) ? 'selected' : '';
+                          echo "<option value='$i' $selected>$i</option>";
+                        }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="semestre">Semestre</label>
+                      <select name="semestre" id="semestre" class="form-control">
+                        <option value="">Todos los semestres</option>
+                        <option value="I" <?= (isset($_GET['semestre']) && $_GET['semestre'] == 'I') ? 'selected' : '' ?>>I Semestre</option>
+                        <option value="II" <?= (isset($_GET['semestre']) && $_GET['semestre'] == 'II') ? 'selected' : '' ?>>II Semestre</option>
+                        <option value="Verano" <?= (isset($_GET['semestre']) && $_GET['semestre'] == 'Verano') ? 'selected' : '' ?>>Vacacional</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                    <?php if (isset($_GET['anio'])) : ?>
+                      <a href="<?= APP_URL ?>/admin/encuestas" class="btn btn-secondary ml-2">Limpiar</a>
+                    <?php endif; ?>
+                  </div>
+                </div>
+              </form>
             </div>
             
             <div class="card-body px-4">
@@ -33,8 +71,10 @@ include ('../../app/controllers/encuestas/listado_de_encuestas.php');
                 <table id="encuestas-table" class="table table-hover table-striped">
                   <thead class="bg-light">
                     <tr>
-                      <th class="text-center" style="width: 5%">#</th>
+                      <th class="text-center" style="width: 5%">N°</th>
                       <th class="text-left">Título</th>
+                      <th class="text-center">Año</th>
+                      <th class="text-center">Semestre</th>
                       <th class="text-center">Tipo</th>
                       <th class="text-left">Escuela</th>
                       <th class="text-center">Creación</th>
@@ -58,6 +98,12 @@ include ('../../app/controllers/encuestas/listado_de_encuestas.php');
                           <i class="bi bi-file-earmark-text text-primary me-2"></i>
                           <?= $encuesta['nombre_encuesta']; ?>
                         </div>
+                      </td>
+                      <td class="text-center align-middle">
+                        <?= $encuesta['anio_academico']; ?>
+                      </td>
+                      <td class="text-center align-middle">
+                        <?= $encuesta['semestre_academico']; ?>
                       </td>
                       <td class="text-center align-middle">
                         <span class="badge bg-secondary-light text-secondary rounded-pill px-3 py-1">

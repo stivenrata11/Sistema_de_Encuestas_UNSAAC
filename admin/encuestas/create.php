@@ -38,6 +38,33 @@ include('../../app/controllers/escuelas/listado_de_escuelas.php');
 
                                     <div class="col-md-4">
                                         <div class="form-group">
+                                            <label for="">Año Académico</label>
+                                            <select name="anio_academico" class="form-control" required>
+                                                <?php 
+                                                $currentYear = date('Y');
+                                                for ($i = $currentYear; $i <= $currentYear + 5; $i++) { 
+                                                    echo "<option value='$i'>$i</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Semestre Académico</label>
+                                            <select name="semestre_academico" class="form-control" required>
+                                                <option value="I">I Semestre</option>
+                                                <option value="II">II Semestre</option>
+                                                <option value="Verano">Vacacional</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
                                             <label for="">Título de la encuesta</label>
                                             <input type="text" name="nombre" class="form-control" placeholder="Ingrese título" required>
                                         </div>

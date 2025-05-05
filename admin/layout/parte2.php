@@ -15,7 +15,9 @@
       V. 1.0 (beta)
     </div>
     <!-- Default to the left -->
-    <strong>Copyright <?=$anio_actual;?> <a href="https://www.instagram.com/guason_jam/">La Casa BETA</a>.</strong> All rights reserved.
+    <strong>Copyright <?=$anio_actual;?> <a href="https://6806709aee84863a00766c36--incredible-cuchufli-b19f04.netlify.app/" target="_blank">Anderson</a>,</strong>
+    <strong><a href="https://luxury-swan-79f2d0.netlify.app/" target="_blank">Edson</a>,</strong>
+    <strong><a href="https://sunny-snickerdoodle-ad37ba.netlify.app/" target="_blank">Fabricio</a>,</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->

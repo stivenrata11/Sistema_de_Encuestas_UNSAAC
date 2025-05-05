@@ -4,6 +4,8 @@ $sql_encuestas = "
     SELECT 
         e.id_encuestas,
         e.nombre AS nombre_encuesta,
+        e.anio_academico,
+        e.semestre_academico,
         e.tipo,
         e.url,
         e.observaciones,
@@ -22,6 +24,8 @@ $encuestas = $query_encuestas->fetchAll(PDO::FETCH_ASSOC);
 
 foreach($encuestas as $encuesta){
     $nombre_encuesta = $encuesta['nombre_encuesta'];
+    $anio_academico = $encuesta['anio_academico'];
+    $semestre_academico = $encuesta['semestres_academico'];
     $tipo = $encuesta['tipo'];
     $url = $encuesta['url'];
     $observaciones = $encuesta['observaciones'];
